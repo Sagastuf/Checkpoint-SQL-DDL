@@ -1,0 +1,75 @@
+CHECKPOINT
+DROP TABLE Products;
+CREATE TABLE Products
+(
+ProductID INT Primary Key,
+ProductName VARCHAR(20),
+Descriptions VARCHAR(30),
+Price INT,
+StockQuantity INT,
+CategoryID INT
+);
+CREATE TABLE Customers
+(
+CustomerID INT Primary Key,
+FirstName VARCHAR(30),
+LastName VARCHAR(20),
+Email VARCHAR(30),
+Phone INT,
+Addresse VARCHAR(100),
+City VARCHAR(20),
+State_Ville VARCHAR(30),
+ZipCode VARCHAR(50)
+);
+CREATE TABLE Categories
+(
+CategoryID INT Primary Key,
+CategoryName VARCHAR(30),
+Descriptions VARCHAR(30)
+);
+CREATE TABLE Orders
+(
+OrderID INT Primary Key,
+CustomerID INT,
+OrderDate INT,
+TotalAmount INT
+);
+CREATE TABLE OrderDetails
+(
+OrderDetailID INT Primary Key,
+OrderID INT, 
+ProductID INT,
+Quantity INT,
+UnitPrice INT
+);
+ALTER TABLE Customers ALTER COLUMN FirstName VARCHAR(30) NOT NULL
+ALTER TABLE Customers ALTER COLUMN LastName VARCHAR(20) NOT NULL
+ALTER TABLE Customers ALTER COLUMN Email VARCHAR(30) NOT NULL
+ALTER TABLE Customers ALTER COLUMN Phone INT NOT NULL
+ALTER TABLE Customers ALTER COLUMN Addresse VARCHAR(100) NOT NULL
+ALTER TABLE Customers ALTER COLUMN City VARCHAR(20) NOT NULL
+ALTER TABLE Customers ALTER COLUMN State_Ville VARCHAR(30) NOT NULL
+ALTER TABLE Customers ALTER COLUMN ZipCode VARCHAR(50) NOT NULL
+);
+ALTER TABLE Categories ALTER COLUMN CategoryName VARCHAR(30) NOT NULL
+ALTER TABLE Categories ALTER COLUMN Descriptions VARCHAR(30) NOT NULL
+ALTER TABLE Products ALTER COLUMN ProductName VARCHAR(20) NOT NULL
+ALTER TABLE Products ALTER COLUMN Descriptions VARCHAR(30) NOT NULL
+ALTER TABLE Products ALTER COLUMN Price INT NOT NULL
+ALTER TABLE Products ALTER COLUMN CategoryID INT NOT NULL
+ALTER TABLE Products ALTER COLUMN StockQuantity INT NOT NULL
+ALTER TABLE OrderDetails ALTER COLUMN OrderID INT NOT NULL
+ALTER TABLE OrderDetails ALTER COLUMN ProductID INT NOT NULL
+ALTER TABLE OrderDetails ALTER COLUMN Quantity INT NOT NULL
+ALTER TABLE OrderDetails ALTER COLUMN UnitPrice INT NOT NULL
+
+
+ALTER TABLE OrderDetails 
+ADD CONSTRAINT const_i FOREIGN KEY (OrderID) REFERENCES Orders(OrderID)
+ALTER TABLE Orders 
+ADD CONSTRAINT const_j FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+ALTER TABLE Products 
+ADD CONSTRAINT const_g FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
+ALTER TABLE OrderDetails 
+ADD CONSTRAINT const_h FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+select *from Products
